@@ -42,21 +42,69 @@ function Main_page() {
       })
       .catch((error) => console.log("error", error));
 
-  }, []);
-
-  useEffect(() => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-
-    fetch("http://127.0.0.1:3500/works", requestOptions)
+      fetch("http://127.0.0.1:3500/works", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         // console.log(result);
         setItems(result);
       });
-  });
+
+
+      
+  }, []);
+
+  // Bad Smell Type Duplicate Code
+  // เนื่องจากมีการแยก useEffect เป็น 2 method แต่ว่าการทำงานภายในคล้ายกัน
+  // แก้โดยการย้ายการทำงาน รวมใน useEffect เดียว
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("Authorization", "Bearer " + token);
+
+  //   var requestOptions = {
+  //     method: "GET",
+  //     headers: myHeaders,
+  //     redirect: "follow",
+  //   };
+
+  //   fetch("http://127.0.0.1:3500/auth/getProfile", requestOptions)
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       if (result.status === 200) {
+  //         setUser(result.user);
+  //         setIsLoaded(false);
+  //       } else if (result.message === "Unauthorized") {
+  //         Swal.fire({
+  //           text: "กรุณา Login",
+  //           icon: "error",
+  //         }).then((value) => {
+  //           navigate("/login");
+  //         });
+  //       }
+  //       console.log(result);
+  //     })
+  //     .catch((error) => console.log("error", error));
+
+
+// Bad smell
+
+      
+  // }, []);
+
+  // useEffect(() => {
+  //   var requestOptions = {
+  //     method: "GET",
+  //     redirect: "follow",
+  //   };
+
+  //   fetch("http://127.0.0.1:3500/works", requestOptions)
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       // console.log(result);
+  //       setItems(result);
+  //     });
+  // });
 
   const logout = () => {
     localStorage.removeItem("token");

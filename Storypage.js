@@ -21,6 +21,40 @@ function Storypage() {
   const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
 
+  // Bad Smell Type Long Method
+  // เนื่องจาก Method useEffect มีการทำงานภายในทีซับซ้อนเกินไป ทำให้โค้ดอ่านยาก
+  // และเป็นการคำสั่งที่การทำงานต่างกัน แก้โดยการแยก เป็น 2 Method เพื่อแยกการทำงานที่ชัดเจน
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("Authorization", "Bearer " + token);
+
+  //   var requestOptions = {
+  //     method: "GET",
+  //     headers: myHeaders,
+  //     redirect: "follow",
+  //   };
+
+  //   fetch("http://127.0.0.1:3500/auth/getProfile", requestOptions)
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       if (result.status === 200) {
+  //         setUser(result.user);
+  //         setIsLoaded(false);
+  //       }
+  //       console.log(result);
+  //     })
+  //     .catch((error) => console.log("error", error));
+
+  //   fetch(http://127.0.0.1:3500/espisodes/findByWorkId/${id}, requestOptions)
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       setEpisode(result);
+  //     })
+  //     .catch((error) => console.log("error", error));
+  // }, []);
+
   
 
   useEffect(() => {
@@ -49,13 +83,26 @@ function Storypage() {
       })
       .catch((error) => console.log("error", error));
 
-      fetch(`http://127.0.0.1:3500/espisodes/findByWorkId/${id}`, requestOptions)
+  }, []);
+
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token);
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(`http://127.0.0.1:3500/espisodes/findByWorkId/${id}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setEpisode(result);
       })
       .catch((error) => console.log("error", error));
-
   }, []);
 
 
@@ -77,6 +124,7 @@ function Storypage() {
         setStory(result);
       } catch (error) {
         console.error("Error fetching story:", error);
+        // Handle error gracefully
       }
     };
 

@@ -62,18 +62,22 @@ function Workpage() {
     window.location = "/storyupdate/" + id;
   };
 
-  const UserList = (id) => {
-    window.location = "/listpage/" + id;
-  };
+  // Bad Smell Type Dead Code/Lazy Class/Speculative Generality
+  // เนื่องจากมีโค้ดที่หลงเหลือจากการแก้ไข ทำให้ไม่ได้ใช้งาน
+  // แก้โดยการลบโค้ดทิ้งไป เพื่อทำให้โค้ดอ่านง่ายขึ้น
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
+  // const UserList = (id) => {
+  //   window.location = "/listpage/" + id;
+  // };
 
-  const listpage = () => {
-    navigate("/listpage");
-  };
+  // const logout = () => {
+  //   localStorage.removeItem("token");
+  //   navigate("/");
+  // };
+
+  // const listpage = () => {
+  //   navigate("/listpage");
+  // };
 
   const UserDelete = (id) => {
     const token = localStorage.getItem("token");
