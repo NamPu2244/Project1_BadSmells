@@ -9,7 +9,7 @@ import "./Storypage.css";
 import Navbar from "./Navbar";
 
 function Storypage() {
-  // Accepting `id` as a prop
+
   const { id } = useParams();
   const { workId } = useParams();
   const [isLoaded, setIsLoaded] = useState(true);
