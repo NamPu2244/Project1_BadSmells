@@ -50,7 +50,7 @@ function Main_page() {
       });
 
 
-      
+  
   }, []);
 
   // Bad Smell Type Duplicate Code
