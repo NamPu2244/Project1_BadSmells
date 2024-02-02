@@ -56,7 +56,7 @@ function Workpage() {
   };
 
 
-  
+
 
   const UserUpdate = (id) => {
     window.location = "/storyupdate/" + id;
